@@ -43,7 +43,8 @@ app.options("*", function (req, res, next) {
 
 app.get("/", (req, res) => res.send("Server Root"));
 app.get("/ping", (req, res) => res.send("pong"));
-
+app.use("/api/v1/user", require("./routes/api/user"));
+app.use("/api/v1/tasks", require("./routes/api/tasks"));
 
 //app.use("/api/v1/auth", require("./routes/api/auth"));
 

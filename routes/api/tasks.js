@@ -5,7 +5,7 @@ const config = require("../../config/config");
 const { check, validationResult } = require("express-validator");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
-const admin_auth = require("../../middleware/admin_auth");
+const user_auth = require("../../middleware/user_auth");
 const { jwt: { jwtAccessSecret, jwtRefreshSecret } } = config;
 var bcrypt = require('bcryptjs');
 const { is } = require("express/lib/request");
@@ -49,3 +49,5 @@ router.post(
         }
     }
 );
+
+module.exports = router;
