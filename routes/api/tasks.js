@@ -31,6 +31,7 @@ router.post(
 
         try {
             let new_task = new Task({
+                user_id: req.user.id,
                 task_name,
                 description,
                 status
