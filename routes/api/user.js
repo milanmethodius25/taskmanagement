@@ -81,7 +81,7 @@ router.post(
 
             // match password
 
-            const isMatch = await bcrypt.compare(password, admin.password);
+            const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
                 return res
