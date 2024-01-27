@@ -32,13 +32,18 @@ router.post(
         email_address = email_address.toLowerCase();
 
         try {
+
+            // let current_user = await User.findOne({
+            //     email_address: email_address
+            // });
+
             let new_user = new User({
                 user_name: user_name,
                 email_address: email_address,
                 password: password
             });
             const salt = await bcrypt.genSalt(10);
-            new_admin.password = await bcrypt.hash(password, salt);
+            new_user.password = await bcrypt.hash(password, salt);
             await new_user.save();
             return res.status(200).send(new_user);
 
