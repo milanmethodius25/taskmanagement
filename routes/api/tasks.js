@@ -14,7 +14,7 @@ router.post(
     "/new_task",
     [
         check("task_name", "Task name Is Required").not().isEmpty(),
-        check("description", "Description Is Required").isEmail(),
+        check("description", "Description Is Required").not().isEmpty(),
         check("status", "Status is required").not().isEmpty(),
     ],
     async (req, res) => {
