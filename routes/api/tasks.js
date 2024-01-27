@@ -50,4 +50,19 @@ router.post(
     }
 );
 
+router.get("/user", user_auth,
+    async (req, res) => {
+        try {
+            let user_task = await Task.find({ user_id: req.user.id });
+            if (!user_task) {
+                return res.status(200).json({ message: "User task not found" });
+            }
+            return res.status(200).json({ user_task });
+        } catch (err) {
+            console.error(err.message);
+            return res.status(500).send({ error: err.message });
+        }
+    }
+)
+
 module.exports = router;
