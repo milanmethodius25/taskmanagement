@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const config = require("../../config/config");
 const { check, validationResult } = require("express-validator");
-const User = require("../../models/User");
+const Task = require("../../models/Task");
 const jwt = require("jsonwebtoken");
 const user_auth = require("../../middleware/user_auth");
 const { jwt: { jwtAccessSecret, jwtRefreshSecret } } = config;
@@ -24,23 +24,20 @@ router.post(
         }
 
         var {
-            user_name,
-            email_address,
-            password
+            task_name,
+            description,
+            status
         } = req.body;
 
-        email_address = email_address.toLowerCase();
-
         try {
-            let new_user = new User({
-                user_name: user_name,
-                email_address: email_address,
-                password: password
+            let new_task = new Task({
+                task_name,
+                description,
+                status
             });
-            const salt = await bcrypt.genSalt(10);
-            new_admin.password = await bcrypt.hash(password, salt);
-            await new_user.save();
-            return res.status(200).send(new_user);
+
+            await new_task.save();
+            return res.status(200).send(new_task);
 
 
         } catch (err) {
