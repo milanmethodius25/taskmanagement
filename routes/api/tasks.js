@@ -63,4 +63,18 @@ router.get("/user", user_auth,
     }
 )
 
+router.get("/id/:id",//admin_auth,
+    async (req, res) => {
+        try {
+            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+                return res.status(400).send("Invalid object id");
+            }
+            let user_task = await Task.find({ user_id: req.params.id })
+            return res.status(200).json({ user_task });
+        } catch (err) {
+            console.error(err.message);
+            return res.status(500).send({ error: err.message });
+        }
+    });
+
 module.exports = router;
