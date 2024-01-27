@@ -11,7 +11,7 @@ var bcrypt = require('bcryptjs');
 const { is } = require("express/lib/request");
 
 router.post(
-    "/new_task",
+    "/new_task", user_auth,
     [
         check("task_name", "Task name Is Required").not().isEmpty(),
         check("description", "Description Is Required").not().isEmpty(),
