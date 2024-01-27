@@ -111,5 +111,17 @@ router.post(
     }
 );
 
-
+router.get("/id/:id",//admin_auth,
+    async (req, res) => {
+        try {
+            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+                return res.status(400).send("Invalid object id");
+            }
+            let current_user = await User.findById(req.params.id)
+            return res.status(200).json({ current_user });
+        } catch (err) {
+            console.error(err.message);
+            return res.status(500).send({ error: err.message });
+        }
+    });
 module.exports = router;
